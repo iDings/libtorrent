@@ -176,7 +176,7 @@ namespace libtorrent {
 		, m_uuid(p.uuid)
 #endif
 		, m_stats_counters(ses.stats_counters())
-		, m_storage_constructor(p.storage)
+		, m_added_time(time(nullptr))
 		, m_info_hash(info_hash)
 		, m_error_file(torrent_status::error_file_none)
 		, m_sequence_number(-1)
@@ -1206,11 +1206,6 @@ namespace libtorrent {
 	storage_mode_t torrent::storage_mode() const
 	{ return storage_mode_t(m_storage_mode); }
 
-	storage_interface* torrent::get_storage_impl() const
-	{
-		return m_ses.disk_thread().get_torrent(m_storage);
-	}
-
 	void torrent::need_picker()
 	{
 		if (m_picker) return;
@@ -1651,10 +1646,9 @@ namespace libtorrent {
 			m_info_hash
 		};
 
-		TORRENT_ASSERT(m_storage_constructor);
-
-		m_storage = m_ses.disk_thread().new_torrent(m_storage_constructor
-			, params, shared_from_this());
+		// the shared_from_this() will create an intentional
+		// cycle of ownership, se the hpp file for description.
+		m_storage = m_ses.disk_thread().new_torrent(std::move(params), shared_from_this());
 	}
 
 	peer_connection* torrent::find_lowest_ranking_peer() const
@@ -2388,13 +2382,6 @@ namespace libtorrent {
 			}
 			we_have(piece);
 		}
-		else
-		{
-			// if the hash failed, remove it from the cache
-			if (m_storage)
-				m_ses.disk_thread().clear_piece(m_storage, piece);
-		}
-
 		if (m_num_checked_pieces < m_torrent_file->end_piece())
 		{
 			// we're not done yet, issue another job
@@ -4007,9 +3994,6 @@ namespace libtorrent {
 		downloaders.clear();
 		peers.clear();
 
-		// make the disk cache flush the piece to disk
-		if (m_storage)
-			m_ses.disk_thread().async_flush_piece(m_storage, index);
 		m_picker->piece_passed(index);
 		update_gauge();
 		we_have(index);
