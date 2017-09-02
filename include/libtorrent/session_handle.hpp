@@ -47,6 +47,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "libtorrent/portmap.hpp" // for portmap_protocol
 
 #include "libtorrent/kademlia/dht_storage.hpp"
+#include "libtorrent/kademlia/dht_settings.hpp"
 
 #ifndef TORRENT_NO_DEPRECATE
 #include "libtorrent/session_settings.hpp"
@@ -62,6 +63,7 @@ namespace libtorrent {
 	class port_filter;
 	class alert;
 	struct settings_pack;
+	using dht::dht_settings;
 
 #ifndef TORRENT_NO_DEPRECATE
 	struct session_status;

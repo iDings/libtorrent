@@ -54,11 +54,11 @@ namespace libtorrent {
 
 	struct counters;
 	struct dht_routing_bucket;
-	struct dht_settings;
 }
 
 namespace libtorrent { namespace dht {
 
+struct dht_settings;
 struct traversal_algorithm;
 struct dht_observer;
 struct msg;

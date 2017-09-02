@@ -128,11 +128,6 @@ namespace aux {
 		struct tracker_logger;
 #endif
 
-#ifndef TORRENT_DISABLE_DHT
-		TORRENT_EXTRA_EXPORT dht_settings read_dht_settings(bdecode_node const& e);
-		TORRENT_EXTRA_EXPORT entry save_dht_settings(dht_settings const& settings);
-#endif
-
 	struct listen_socket_t
 	{
 		listen_socket_t()
@@ -1156,9 +1151,6 @@ namespace aux {
 #endif
 
 			// mask is a bitmask of which protocols to remap on:
-			// 1: NAT-PMP
-			// 2: UPnP
-			// TODO: 3 perhaps this function should move into listen_socket_t
 			enum remap_port_mask_t
 			{
 				remap_natpmp = 1,
