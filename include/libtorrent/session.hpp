@@ -153,7 +153,7 @@ namespace aux {
 
 		std::vector<std::shared_ptr<plugin>> extensions;
 
-		libtorrent::dht_settings dht_settings;
+		dht::dht_settings dht_settings;
 
 		dht::dht_state dht_state;
 

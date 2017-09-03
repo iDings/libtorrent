@@ -366,8 +366,8 @@ namespace aux {
 			void add_dht_node_name(std::pair<std::string, int> const& node);
 			void add_dht_node(udp::endpoint const& n) override;
 			void add_dht_router(std::pair<std::string, int> const& node);
-			void set_dht_settings(dht_settings const& s);
-			dht_settings const& get_dht_settings() const { return m_dht_settings; }
+			void set_dht_settings(dht::dht_settings const& s);
+			dht::dht_settings const& get_dht_settings() const { return m_dht_settings; }
 			void set_dht_state(dht::dht_state state);
 			void set_dht_storage(dht::dht_storage_constructor_type sc);
 			void start_dht();
@@ -1034,7 +1034,7 @@ namespace aux {
 #ifndef TORRENT_DISABLE_DHT
 			std::unique_ptr<dht::dht_storage_interface> m_dht_storage;
 			std::shared_ptr<dht::dht_tracker> m_dht;
-			dht_settings m_dht_settings;
+			dht::dht_settings m_dht_settings;
 			dht::dht_storage_constructor_type m_dht_storage_constructor
 				= dht::dht_default_storage_constructor;
 

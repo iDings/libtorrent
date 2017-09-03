@@ -63,7 +63,6 @@ namespace libtorrent {
 	class port_filter;
 	class alert;
 	struct settings_pack;
-	using dht::dht_settings;
 
 #ifndef TORRENT_NO_DEPRECATE
 	struct session_status;
@@ -334,9 +333,9 @@ namespace libtorrent {
 		// otherwise.
 		//
 		// ``get_dht_settings()`` returns the current settings
-		void set_dht_settings(dht_settings const& settings);
+		void set_dht_settings(dht::dht_settings const& settings);
 		bool is_dht_running() const;
-		dht_settings get_dht_settings() const;
+		dht::dht_settings get_dht_settings() const;
 
 		// ``set_dht_storage`` set a dht custom storage constructor function
 		// to be used internally when the dht is created.

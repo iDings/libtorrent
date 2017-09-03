@@ -5645,7 +5645,7 @@ namespace {
 		m_dht_storage.reset();
 	}
 
-	void session_impl::set_dht_settings(dht_settings const& settings)
+	void session_impl::set_dht_settings(dht::dht_settings const& settings)
 	{
 		m_dht_settings = settings;
 	}

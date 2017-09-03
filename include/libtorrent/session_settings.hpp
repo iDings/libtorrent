@@ -47,13 +47,10 @@ namespace libtorrent {
 
 #ifndef TORRENT_NO_DEPRECATE
 
+	using dht_settings = dht::dht_settings;
+
 	using aux::proxy_settings;
 
-#endif
-
-	using dht::dht_settings;
-
-#ifndef TORRENT_NO_DEPRECATE
 	// The ``pe_settings`` structure is used to control the settings related
 	// to peer protocol encryption.
 	struct TORRENT_EXPORT pe_settings
